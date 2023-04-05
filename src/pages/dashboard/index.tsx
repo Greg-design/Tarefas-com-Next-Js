@@ -86,6 +86,7 @@ export default function Dashboard({ user }: HomeProps) {
     alert("URL copiada com sucesso!");
   }
 
+  // funcionalidade de deletar a tarefa
   async function handleDeleteTask(id: string) {
     const docRef = doc(db, "tarefas", id);
     await deleteDoc(docRef);
