@@ -5,7 +5,7 @@ import styles from "./styles.module.css";
 
 import { Textarea } from "@/components/Textarea";
 import { db } from "@/services/firebaseConnection";
-import { addDoc, collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, query, where } from "firebase/firestore";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { FaTrash } from "react-icons/fa";
 
@@ -65,6 +65,18 @@ export default function Task({ item, allComments }: TaskProps) {
     }
   }
 
+  async function handleDeleteComment(id: string) {
+    try {
+      const docRef = doc(db, "comments", id);
+      await deleteDoc(docRef);
+
+      const deleteComment = comments.filter((item) => item.id !== id); // vai devolver todos os items menos aquele que agente clicou, removendo ele assim.
+      setComments(deleteComment);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -102,7 +114,7 @@ export default function Task({ item, allComments }: TaskProps) {
             <div className={styles.headComment}>
               <label className={styles.commentsLabel}>{item.name}</label>
               {item.user === session?.user?.email && (
-                <button className={styles.buttonTrash}>
+                <button className={styles.buttonTrash} onClick={() => handleDeleteComment(item.id)}>
                   <FaTrash size={18} color="#ea3140" />
                 </button>
               )}
