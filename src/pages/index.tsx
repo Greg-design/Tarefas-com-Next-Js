@@ -59,3 +59,17 @@ export const getStaticProps: GetStaticProps = async () => {
     revalidate: 60, //seria revalidada a cada 60 segundos.
   };
 };
+
+/*
+-criar um arquivo .env e colocar os seguintes códigos
+
+GOOGLE_CLIENT_ID=303187119539-348r5d99m3p7b4m2d7adrqlg1hqsuld2.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=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
+
+NEXTAUTH_URL=http://localhost:3000
+
+JWT_SECRET=9eed2b3d46bf74b2288343816ba01c33
+
+NEXT_PUBLIC_URL=http://localhost:3000
+
+*/
